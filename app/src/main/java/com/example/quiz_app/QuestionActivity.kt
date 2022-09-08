@@ -42,9 +42,11 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
         tv_secondOption?.setOnClickListener(this)
         tv_thirdOption?.setOnClickListener(this)
         tv_fourthOption?.setOnClickListener(this)
+        button_submit?.setOnClickListener (this)
 
     }
     private fun setQuestion(){
+        defaultOptionBorderView()
         val question:Question = allQuestion!![currentPostion - 1]
         tv_question?.text = question.questionDescription
         iv_image?.setImageResource(question.image)
@@ -61,7 +63,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
         }
 
     }
-    private fun defaultOptionBorder(){
+    private fun defaultOptionBorderView(){
         val options = ArrayList<TextView>()
         tv_firstOption?.let{
             options.add(0, it)
@@ -84,8 +86,8 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
             )
         }
     }
-    private fun selectedOptionBorder(textView: TextView, selectedOptionNum: Int){
-        defaultOptionBorder()
+    private fun selectedOptionBorderView(textView: TextView, selectedOptionNum: Int){
+        defaultOptionBorderView()
         selectedOptionPosition = selectedOptionNum
 
         textView.setTextColor(Color.parseColor("#363A43"))
@@ -93,29 +95,87 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
         textView.background = ContextCompat.getDrawable(this,
         R.drawable.selected_border)
     }
+    private fun answerOptionBorderView(answer: Int, View: Int) {
+        when (answer) {
+            1 -> {
+                tv_firstOption?.background = ContextCompat.getDrawable(
+                    this@QuestionActivity,
+                    View
+                )
+            }
+            2 -> {
+                tv_secondOption?.background = ContextCompat.getDrawable(
+                    this@QuestionActivity,
+                    View
+                )
+            }
+            3 -> {
+                tv_thirdOption?.background = ContextCompat.getDrawable(
+                    this@QuestionActivity,
+                    View
+                )
+            }
+            4 -> {
+                tv_fourthOption?.background = ContextCompat.getDrawable(
+                    this@QuestionActivity,
+                    View
+                )
+            }
+        }
+    }
+
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.tv_first_option -> {
                 tv_firstOption?.let {
-                    selectedOptionBorder(it, 1)
+                    selectedOptionBorderView(it, 1)
                 }
             }
             R.id.tv_second_option -> {
                 tv_secondOption?.let {
-                    selectedOptionBorder(it, 2)
+                    selectedOptionBorderView(it, 2)
                 }
             }
             R.id.tv_third_option -> {
                 tv_thirdOption?.let {
-                    selectedOptionBorder(it, 3)
+                    selectedOptionBorderView(it, 3)
                 }
             }
             R.id.tv_fourth_option -> {
                 tv_fourthOption?.let {
-                    selectedOptionBorder(it, 4)
+                    selectedOptionBorderView(it, 4)
                 }
             }
+            R.id.button_submit -> {
+                if(selectedOptionPosition ==0) {
+                    currentPostion++
+
+                    when {
+                        currentPostion <= allQuestion!!.size -> {
+                            setQuestion()
+                        }
+                        else -> {
+
+                        }
+                    }
+                }
+                else
+                {
+                    val question = allQuestion?.get(currentPostion-1)
+                    if(question!!.correctAnswer == selectedOptionPosition){
+                        answerOptionBorderView(selectedOptionPosition, R.drawable.correct_border)
+                    }
+                    else{
+                        answerOptionBorderView(selectedOptionPosition, R.drawable.wrong_border)
+                    }
+
+                }
+                selectedOptionPosition = 0
+            }
+
         }
+
+
 
 
     }
