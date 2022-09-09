@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
             }
             else{
                 val intent = Intent(this, QuestionActivity::class.java)
+                intent.putExtra(Constants.USER_NAME, editTextName.text.toString())
                 startActivity(intent)
                 finish()
             }

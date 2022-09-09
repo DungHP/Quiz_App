@@ -1,5 +1,6 @@
 package com.example.quiz_app
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -22,10 +23,14 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
     private var allQuestion :  ArrayList<Question>? = null
     private var button_submit : Button? = null
     private var selectedOptionPosition = 0
+    private var user_name : String ? = null
+    private var correct_answers : Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
+
 
         tv_question = findViewById(R.id.tv_questionDescription)
         iv_image = findViewById(R.id.iv_questionImage)
@@ -149,13 +154,18 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
             R.id.button_submit -> {
                 if(selectedOptionPosition ==0) {
                     currentPostion++
-
+                    //When there are still question
                     when {
                         currentPostion <= allQuestion!!.size -> {
                             setQuestion()
                         }
+                        //when no question left
                         else -> {
-
+                            val intent = Intent(this, FinalResultActivity::class.java)
+                            intent.putExtra(Constants.USER_NAME,  user_name)
+                            intent.putExtra(Constants.ALL_CORRECT_ANSWERS, correct_answers)
+                            intent.putExtra(Constants.TOTAL_QUESTIONS, allQuestion?.size)
+                            startActivity(intent)
                         }
                     }
                 }
@@ -163,6 +173,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
                 {
                     val question = allQuestion?.get(currentPostion-1)
                     if(question!!.correctAnswer == selectedOptionPosition){
+                        correct_answers++
                         answerOptionBorderView(selectedOptionPosition, R.drawable.correct_border)
                     }
                     else{
