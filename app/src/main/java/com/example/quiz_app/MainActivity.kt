@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please Enter Your name before submit", Toast.LENGTH_LONG).show()
             }
             else{
-                val intent = Intent(this, QuestionActivity::class.java)
+                val intent = Intent(this, OptionActivity::class.java)
                 intent.putExtra(Constants.USER_NAME, editTextName.text.toString())
                 startActivity(intent)
                 finish()
