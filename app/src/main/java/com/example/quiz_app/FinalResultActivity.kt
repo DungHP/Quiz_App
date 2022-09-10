@@ -22,8 +22,8 @@ class FinalResultActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
         userName.text = intent.getStringExtra(Constants.USER_NAME)
-        val total_questions = intent.getIntExtra(Constants.ALL_CORRECT_ANSWERS, 0)
-        val correct_answers = intent.getIntExtra(Constants.TOTAL_QUESTIONS, 0)
+        val correct_answers = intent.getIntExtra(Constants.ALL_CORRECT_ANSWERS, 0)
+        val total_questions = intent.getIntExtra(Constants.TOTAL_QUESTIONS, 0)
         score.text = "Your Final Score is $correct_answers / $total_questions"
 
     }

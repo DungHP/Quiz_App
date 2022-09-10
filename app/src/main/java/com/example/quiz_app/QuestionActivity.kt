@@ -39,10 +39,22 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
         tv_thirdOption = findViewById(R.id.tv_third_option)
         tv_fourthOption = findViewById(R.id.tv_fourth_option)
         button_submit = findViewById(R.id.button_submit)
-        allQuestion = Constants.getAllQuestions()
-
+        val category = intent.getStringExtra(Constants.CATEGORY)
+        if(category == "1"){
+            allQuestion = Constants.getAllActorQuestions()
+        }
+        else if(category == "2"){
+            allQuestion = Constants.getAllGeographyQuestions()
+        }
+        else if(category == "3"){
+            allQuestion = Constants.getAllHistoryQuestions()
+        }
+        else{
+            allQuestion = Constants.getAllSportQuestions()
+        }
+        //Set All Question
         setQuestion()
-
+        //Set Click for all options
         tv_firstOption?.setOnClickListener(this)
         tv_secondOption?.setOnClickListener(this)
         tv_thirdOption?.setOnClickListener(this)
@@ -153,7 +165,6 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.button_submit -> {
                 if(selectedOptionPosition ==0) {
-                    currentPostion++
                     //When there are still question
                     when {
                         currentPostion <= allQuestion!!.size -> {
@@ -175,13 +186,15 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
                     if(question!!.correctAnswer == selectedOptionPosition){
                         correct_answers++
                         answerOptionBorderView(selectedOptionPosition, R.drawable.correct_border)
+                        currentPostion++
                     }
                     else{
                         answerOptionBorderView(selectedOptionPosition, R.drawable.wrong_border)
+                        currentPostion++
                     }
-
+                    selectedOptionPosition = 0
                 }
-                selectedOptionPosition = 0
+
             }
 
         }
