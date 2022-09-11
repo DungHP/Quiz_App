@@ -6,10 +6,9 @@ import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.quiz_app.databinding.ActivityQuestionBinding
 import org.w3c.dom.Text
 
@@ -21,14 +20,14 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
     private var selectedOptionPosition = 0
     private var user_name : String ? = null
     private var correct_answers : Int = 0
-
+    private var questionAdapter : QuestionStatusAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuestionBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
-        if(category == "1"){
+        category = intent.getStringExtra(Constants.CATEGORY)
+        if (category == "1"){
             allQuestion = Constants.getAllActorQuestions()
         }
         else if(category == "2"){
@@ -49,16 +48,21 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
         binding?.tvFourthOption?.setOnClickListener(this)
         binding?.buttonSubmit?.setOnClickListener(this)
 
+
+        setUpQuestionStatusRecyclerView()
     }
     private fun setQuestion(){
         defaultOptionBorderView()
+        setUpQuestionStatusRecyclerView()
         val question:Question = allQuestion!![currentPostion - 1]
+
         binding?.tvQuestionDescription?.text = question.questionDescription
         binding?.ivQuestionImage?.setImageResource(question.image)
         binding?.tvFirstOption?.text = question.firstOption
         binding?.tvSecondOption?.text = question.secondOption
         binding?.tvThirdOption?.text = question.thirdOption
         binding?.tvFourthOption?.text = question.fourthOption
+        question.isSelected = true
 
         if(currentPostion == allQuestion!!.size){
             binding?.buttonSubmit?.text = "DONE"
@@ -186,10 +190,14 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
             }
 
         }
-
-
-
-
+    }
+    private fun setUpQuestionStatusRecyclerView(){
+        binding?.rvQuestionStatus?.layoutManager = LinearLayoutManager(
+            this, LinearLayoutManager.HORIZONTAL, false
+        )
+        questionAdapter = QuestionStatusAdapter(allQuestion!!)
+        //Link Question Adapter with View Adapter
+        binding?.rvQuestionStatus?.adapter = questionAdapter
     }
 
 }
