@@ -6,21 +6,22 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.quiz_app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private var binding: ActivityMainBinding? =null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val buttonSwitchScreen : Button = findViewById(R.id.button_switch_screen)
-        val editTextName : EditText = findViewById(R.id.edit_text_name)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
 
-        buttonSwitchScreen.setOnClickListener{
-            if(editTextName.text.isEmpty()){
+        binding?.buttonSwitchScreen?.setOnClickListener{
+            if(binding?.editTextName?.text!!.isEmpty()){
                 Toast.makeText(this, "Please Enter Your name before submit", Toast.LENGTH_LONG).show()
             }
             else{
                 val intent = Intent(this, OptionActivity::class.java)
-                intent.putExtra(Constants.USER_NAME, editTextName.text.toString())
+                intent.putExtra(Constants.USER_NAME, binding?.editTextName?.text.toString())
                 startActivity(intent)
                 finish()
             }

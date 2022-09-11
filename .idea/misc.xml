@@ -4,15 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.298" />
+        <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/drawable/circular_gray_background.xml" value="0.1915" />
         <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/drawable/correct_border.xml" value="0.298" />
         <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/drawable/default_border.xml" value="0.189" />
         <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.298" />
+        <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/drawable/question_status.xml" value="0.1915" />
         <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/drawable/selected_border.xml" value="0.1395" />
         <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/drawable/wrong_border.xml" value="0.298" />
         <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/layout/activity_final_result.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/layout/activity_main.xml" value="0.35778985507246375" />
         <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/layout/activity_option.xml" value="0.35778985507246375" />
-        <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/layout/activity_question.xml" value="0.1" />
+        <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/layout/activity_question.xml" value="0.18" />
+        <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/layout/question_status.xml" value="0.18333333333333332" />
         <entry key="..\:/Users/my_pc/AndroidStudioProjects/Quiz_App/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1865" />
       </map>
     </option>

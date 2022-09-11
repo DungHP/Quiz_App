@@ -7,24 +7,23 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.quiz_app.databinding.ActivityFinalResultBinding
 
 class FinalResultActivity : AppCompatActivity() {
-
+    private var binding: ActivityFinalResultBinding ? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_final_result)
-
-        val userName: TextView = findViewById(R.id.tv_name)
-        val score : TextView = findViewById(R.id.tv_total_score)
+        binding = ActivityFinalResultBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
 
         val finishButton : Button = findViewById(R.id.button_finish)
         finishButton.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
-        userName.text = intent.getStringExtra(Constants.USER_NAME)
+        binding?.tvName?.text = intent.getStringExtra(Constants.USER_NAME)
         val correct_answers = intent.getIntExtra(Constants.ALL_CORRECT_ANSWERS, 0)
         val total_questions = intent.getIntExtra(Constants.TOTAL_QUESTIONS, 0)
-        score.text = "Your Final Score is $correct_answers / $total_questions"
+        binding?.tvTotalScore?.text = "Your Final Score is $correct_answers / $total_questions"
 
     }
 }

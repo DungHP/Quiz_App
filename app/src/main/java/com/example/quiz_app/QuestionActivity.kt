@@ -10,18 +10,14 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.example.quiz_app.databinding.ActivityQuestionBinding
 import org.w3c.dom.Text
 
 class QuestionActivity : AppCompatActivity(), View.OnClickListener {
-    private var tv_question : TextView? = null
-    private var iv_image : ImageView? = null
-    private var tv_firstOption : TextView? = null
-    private var tv_secondOption : TextView? = null
-    private var tv_thirdOption : TextView? = null
-    private var tv_fourthOption : TextView? = null
+    private var binding: ActivityQuestionBinding ? = null
     private var currentPostion = 1
     private var allQuestion :  ArrayList<Question>? = null
-    private var button_submit : Button? = null
+    private var category : String ? = null
     private var selectedOptionPosition = 0
     private var user_name : String ? = null
     private var correct_answers : Int = 0
@@ -29,17 +25,9 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_question)
+        binding = ActivityQuestionBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
 
-
-        tv_question = findViewById(R.id.tv_questionDescription)
-        iv_image = findViewById(R.id.iv_questionImage)
-        tv_firstOption = findViewById(R.id.tv_first_option)
-        tv_secondOption = findViewById(R.id.tv_second_option)
-        tv_thirdOption = findViewById(R.id.tv_third_option)
-        tv_fourthOption = findViewById(R.id.tv_fourth_option)
-        button_submit = findViewById(R.id.button_submit)
-        val category = intent.getStringExtra(Constants.CATEGORY)
         if(category == "1"){
             allQuestion = Constants.getAllActorQuestions()
         }
@@ -55,43 +43,43 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
         //Set All Question
         setQuestion()
         //Set Click for all options
-        tv_firstOption?.setOnClickListener(this)
-        tv_secondOption?.setOnClickListener(this)
-        tv_thirdOption?.setOnClickListener(this)
-        tv_fourthOption?.setOnClickListener(this)
-        button_submit?.setOnClickListener (this)
+        binding?.tvFirstOption?.setOnClickListener(this)
+        binding?.tvSecondOption?.setOnClickListener(this)
+        binding?.tvThirdOption?.setOnClickListener(this)
+        binding?.tvFourthOption?.setOnClickListener(this)
+        binding?.buttonSubmit?.setOnClickListener(this)
 
     }
     private fun setQuestion(){
         defaultOptionBorderView()
         val question:Question = allQuestion!![currentPostion - 1]
-        tv_question?.text = question.questionDescription
-        iv_image?.setImageResource(question.image)
-        tv_firstOption?.text = question.firstOption
-        tv_secondOption?.text = question.secondOption
-        tv_thirdOption?.text = question.thirdOption
-        tv_fourthOption?.text = question.fourthOption
+        binding?.tvQuestionDescription?.text = question.questionDescription
+        binding?.ivQuestionImage?.setImageResource(question.image)
+        binding?.tvFirstOption?.text = question.firstOption
+        binding?.tvSecondOption?.text = question.secondOption
+        binding?.tvThirdOption?.text = question.thirdOption
+        binding?.tvFourthOption?.text = question.fourthOption
 
         if(currentPostion == allQuestion!!.size){
-            button_submit?.text = "DONE"
+            binding?.buttonSubmit?.text = "DONE"
         }
         else{
-            button_submit?.text = "SUBMIT"
+            binding?.buttonSubmit?.text = "SUBMIT"
         }
 
     }
     private fun defaultOptionBorderView(){
         val options = ArrayList<TextView>()
-        tv_firstOption?.let{
+        binding?.tvFirstOption?.let{
             options.add(0, it)
         }
-        tv_secondOption?.let{
+        binding?.tvSecondOption?.let{
             options.add(1, it)
         }
-        tv_thirdOption?.let{
+        binding?.tvThirdOption?.let{
             options.add(2, it)
         }
-        tv_fourthOption?.let{
+        binding?.tvFourthOption?.let{
             options.add(3, it)
         }
 
@@ -115,25 +103,25 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
     private fun answerOptionBorderView(answer: Int, View: Int) {
         when (answer) {
             1 -> {
-                tv_firstOption?.background = ContextCompat.getDrawable(
+                binding?.tvFirstOption?.background = ContextCompat.getDrawable(
                     this@QuestionActivity,
                     View
                 )
             }
             2 -> {
-                tv_secondOption?.background = ContextCompat.getDrawable(
+                binding?.tvSecondOption?.background = ContextCompat.getDrawable(
                     this@QuestionActivity,
                     View
                 )
             }
             3 -> {
-                tv_thirdOption?.background = ContextCompat.getDrawable(
+                binding?.tvThirdOption?.background = ContextCompat.getDrawable(
                     this@QuestionActivity,
                     View
                 )
             }
             4 -> {
-                tv_fourthOption?.background = ContextCompat.getDrawable(
+                binding?.tvFourthOption?.background = ContextCompat.getDrawable(
                     this@QuestionActivity,
                     View
                 )
@@ -144,22 +132,22 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.tv_first_option -> {
-                tv_firstOption?.let {
+                binding?.tvFirstOption?.let {
                     selectedOptionBorderView(it, 1)
                 }
             }
             R.id.tv_second_option -> {
-                tv_secondOption?.let {
+                binding?.tvSecondOption?.let {
                     selectedOptionBorderView(it, 2)
                 }
             }
             R.id.tv_third_option -> {
-                tv_thirdOption?.let {
+                binding?.tvThirdOption?.let {
                     selectedOptionBorderView(it, 3)
                 }
             }
             R.id.tv_fourth_option -> {
-                tv_fourthOption?.let {
+                binding?.tvFourthOption?.let {
                     selectedOptionBorderView(it, 4)
                 }
             }

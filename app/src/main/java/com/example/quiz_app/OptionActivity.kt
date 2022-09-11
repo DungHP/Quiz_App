@@ -5,34 +5,31 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import androidx.cardview.widget.CardView
+import com.example.quiz_app.databinding.ActivityOptionBinding
 
 class OptionActivity : AppCompatActivity() {
     private var user_name : String ? = null
+    private var binding: ActivityOptionBinding ? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_option)
+        binding = ActivityOptionBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
 
-        val cv_actor : CardView = findViewById(R.id.cv_actor)
-        val cv_geography : CardView = findViewById(R.id.cv_geography)
-        val cv_history : CardView= findViewById(R.id.cv_history)
-        val cv_sport : CardView = findViewById(R.id.cv_sport)
-
-
-        cv_actor.setOnClickListener{
+        binding?.cvActor?.setOnClickListener{
             val intent = Intent(this, QuestionActivity::class.java)
             intent.putExtra(Constants.USER_NAME, user_name)
             intent.putExtra(Constants.CATEGORY, "1")
             startActivity(intent)
             finish()
         }
-        cv_geography.setOnClickListener{
+        binding?.cvGeography?.setOnClickListener{
             val intent = Intent(this, QuestionActivity::class.java)
             intent.putExtra(Constants.USER_NAME, user_name)
             intent.putExtra(Constants.CATEGORY, "2")
             startActivity(intent)
             finish()
         }
-        cv_history.setOnClickListener{
+        binding?.cvHistory?.setOnClickListener{
             val intent = Intent(this, QuestionActivity::class.java)
             intent.putExtra(Constants.USER_NAME, user_name)
             intent.putExtra(Constants.CATEGORY, "3")
@@ -40,7 +37,7 @@ class OptionActivity : AppCompatActivity() {
             finish()
         }
 
-        cv_sport.setOnClickListener{
+        binding?.cvSport?.setOnClickListener{
             val intent = Intent(this, QuestionActivity::class.java)
             intent.putExtra(Constants.USER_NAME, user_name)
             intent.putExtra(Constants.CATEGORY, "4")
